@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Voynich MS 408 — Currier Hand Edition (v2)</title>
@@ -107,58 +107,58 @@
 <body class="light">
 
 <header>
-  <h1>VOYNICH MS 408 — IL CIFRARIO DEI FARMACISTI</h1>
-  <div class="subtitle">v2 — Currier Hand Edition · 174 folii · PCA su 27 morfemi</div>
+  <h1>VOYNICH MS 408 — THE PHARMACISTS' CIPHER</h1>
+  <div class="subtitle">v2 — Currier Hand Edition · 174 folios · PCA on 27 morphemes</div>
 </header>
 
 <div class="controls">
-  <label>Spazio:</label>
+  <label>Space:</label>
   <select id="spaceSel">
-    <option value="joint">Spazio congiunto (entrambe le mani)</option>
-    <option value="spaceA">Spazio Hand A (PC su soli folii Currier-A)</option>
-    <option value="spaceB">Spazio Hand B (PC su soli folii Currier-B)</option>
+    <option value="joint">Joint space (both hands)</option>
+    <option value="spaceA">Hand A space (PCA on Currier-A folios only)</option>
+    <option value="spaceB">Hand B space (PCA on Currier-B folios only)</option>
   </select>
-  <label>Tema:</label>
-  <button id="bgToggle">☾ Tema scuro</button>
-  <label>Spaziatura:</label>
-  <button id="zoomBtn">🔍 Compatta</button>
+  <label>Theme:</label>
+  <button id="bgToggle">☾ Dark theme</button>
+  <label>Spacing:</label>
+  <button id="zoomBtn">🔍 Compact</button>
   <span id="legendInfo" style="margin-left: 20px; color: var(--sub); font-size: 0.8em;">
-    ● Hand A &nbsp; ◆ Hand B &nbsp; · &nbsp; colore = sezione
+    ● Hand A &nbsp; ◆ Hand B &nbsp; · &nbsp; color = section
   </span>
 </div>
 
 <div class="container">
   <div class="panel full">
-    <div class="panel-title">PCA 3D (drag = ruota, scroll = zoom)</div>
+    <div class="panel-title">3D PCA (drag = rotate, scroll = zoom)</div>
     <div id="scatter3d" style="height: 580px"></div>
   </div>
   <div class="panel">
-    <div class="panel-title">Profilo verbale per (sezione × mano)</div>
+    <div class="panel-title">Verb profile by (section × hand)</div>
     <div id="verbprofile" style="height: 320px"></div>
   </div>
   <div class="panel">
-    <div class="panel-title">Asse Currier (PC1 spazio congiunto)</div>
+    <div class="panel-title">Currier axis (joint-space PC1)</div>
     <div id="pc1density" style="height: 320px"></div>
   </div>
 </div>
 
 <div class="stats">
-  <b>Cosa stai guardando.</b>
-  Ogni punto è un <b>folio</b> proiettato su un PCA di 27 morfemi.
-  Il colore è la sezione tematica; la forma è la mano di Currier
+  <b>What you are looking at.</b>
+  Each point is a <b>folio</b> projected onto a PCA of 27 morphemes.
+  Color encodes the thematic section; marker shape encodes the Currier hand
   (● = Hand A &nbsp; ◆ = Hand B).<br>
-  <b>Risultato chiave.</b>
-  Nello spazio congiunto, <b>PC1 (39.2% varianza)</b>
-  separa Hand A da Hand B con <b>Cohen's d = 2.94</b>
-  (effetto enorme). PC1 negativo = <code>edy/dy/d/y</code> dominanti (registro B,
-  macerazione e flusso anaforico); PC1 positivo = <code>ch/chy</code> dominanti
-  (registro A, estrazione termica).<br>
-  <b>Spazi separati.</b>
+  <b>Key result.</b>
+  In the joint space, <b>PC1 (39.2% variance)</b>
+  separates Hand A from Hand B with <b>Cohen's d = 2.94</b>
+  (huge effect). Negative PC1 = <code>edy/dy/d/y</code> dominant (B register,
+  maceration and anaphoric flow); positive PC1 = <code>ch/chy</code> dominant
+  (A register, thermal extraction).<br>
+  <b>Separate spaces.</b>
   cos(PC1<sub>A</sub>, PC1<sub>B</sub>) = <b>+0.49</b>,
   cos(PC2<sub>A</sub>, PC2<sub>B</sub>) = <b>+0.20</b>.
-  Le due grammatiche organizzano lo spazio morfemico in direzioni diverse:
-  Hand A intorno all'asse termico (ch/chy/t), Hand B intorno all'asse
-  macerativo (edy/dy). <b>Non è una rotazione, è un'altra grammatica.</b>
+  The two grammars organize the morphemic space along different directions:
+  Hand A around the thermal axis (ch/chy/t), Hand B around the maceration
+  axis (edy/dy). <b>This is not a rotation — it's a different grammar.</b>
 </div>
 
 <script>
@@ -310,12 +310,12 @@ document.getElementById('bgToggle').addEventListener('click', () => {
   isLight = !isLight;
   document.body.classList.toggle('light', isLight);
   document.body.classList.toggle('dark', !isLight);
-  document.getElementById('bgToggle').textContent = isLight ? '☾ Tema scuro' : '☼ Tema chiaro';
+  document.getElementById('bgToggle').textContent = isLight ? '☾ Dark theme' : '☼ Light theme';
   renderAll();
 });
 document.getElementById('zoomBtn').addEventListener('click', () => {
   zoomTight = !zoomTight;
-  document.getElementById('zoomBtn').textContent = zoomTight ? '🔍 Compatta' : '🔍 Espandi';
+  document.getElementById('zoomBtn').textContent = zoomTight ? '🔍 Compact' : '🔍 Expanded';
   renderScatter();
 });
 

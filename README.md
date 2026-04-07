@@ -1,116 +1,118 @@
 # Voynich Visualization
 
-Visualizzatore interattivo del sistema morfemico del Voynich Manuscript (MS 408),
-con focus sul **Currier language split** (Hand A vs Hand B) emerso dall'analisi
-PCA dei vettori morfemici dei singoli folii.
+Interactive visualization of the morphemic system of the Voynich Manuscript
+(MS 408), focused on the **Currier language split** (Hand A vs Hand B) that
+emerges from PCA on per-folio morphemic vectors.
 
-→ **[Apri il visualizzatore](https://alessandroplaca-uro.github.io/voynich-visualization/)**
+→ **[Open the visualizer](https://alessandroplaca-uro.github.io/voynich-visualization/)**
 
-## Cosa stai guardando
+## What you are looking at
 
-Ogni punto nel grafico 3D è un **folio** del manoscritto, proiettato in uno spazio
-PCA costruito sulle frequenze di 27 morfemi atomici (solventi, gallows, bench
-characters, suffissi verbali). Il colore codifica la **sezione tematica**
-(Herbal, Balneo, Pharma, Stars), mentre la **forma del marker** codifica il
-registro grammaticale di **Currier** (`$L=A` cerchio, `$L=B` rombo).
+Each point in the 3D plot is a **folio** of the manuscript, projected into a
+PCA space built from the relative frequencies of 27 atomic morphemes (solvents,
+gallows, bench characters, verbal suffixes). Color encodes the **thematic
+section** (Herbal, Balneo, Pharma, Stars), and **marker shape** encodes the
+**Currier grammatical register** (`$L=A` circle, `$L=B` diamond).
 
-Tre spazi PCA selezionabili dal menu a tendina:
+Three PCA spaces are selectable from the dropdown:
 
-1. **Spazio congiunto** — PCA su tutti i 174 folii insieme. PC1 (39.2% della
-   varianza) separa Hand A da Hand B con Cohen's d = 2.94 ("huge effect"). Il
-   primo asse del corpus al livello morfemico è la lingua di Currier, non il
-   tema.
-2. **Spazio Hand A** — PCA fatta solo sui folii Currier-A. L'asse principale
-   (23.7% var) è termico: `ch/chy/t` vs `l`.
-3. **Spazio Hand B** — PCA fatta solo sui folii Currier-B. L'asse principale
-   (37.3% var, struttura unidimensionale fortissima) è "intensità di
-   macerazione": `d/y/dy/edy` collineari.
+1. **Joint space** — PCA over all 174 folios together. PC1 (39.2% of variance)
+   separates Hand A from Hand B with Cohen's d = 2.94 ("huge effect"). The
+   first axis of the corpus at the morphemic level is Currier's language, not
+   the theme.
+2. **Hand A space** — PCA computed on Currier-A folios only. The principal
+   axis (23.7% var) is thermal: `ch/chy/t` vs `l`.
+3. **Hand B space** — PCA computed on Currier-B folios only. The principal
+   axis (37.3% var, very strong unidimensional structure) is "maceration
+   intensity": `d/y/dy/edy` collinear.
 
-Sotto il grafico 3D:
+Below the 3D plot:
 
-- **Profilo verbale per (sezione × mano)**: barre raggruppate dei verbi
-  `edy/chy/shy/ey/eey/dy/ody/lky` per ogni gruppo. Si vede a colpo d'occhio
-  che Pharma-A è dominato da `ody` e Balneo-B è una muraglia di `edy`.
-- **Asse Currier (boxplot di PC1 congiunto)**: distribuzione di PC1 per
-  ciascun gruppo (sec × hand), con la media. La separazione fra le due
-  popolazioni è massiva.
+- **Verb profile by (section × hand)**: grouped bars of the verbs
+  `edy/chy/shy/ey/eey/dy/ody/lky` for each group. You can see at a glance
+  that Pharma-A is dominated by `ody` and Balneo-B is a wall of `edy`.
+- **Currier axis (joint-PC1 boxplot)**: PC1 distribution per group
+  (sec × hand), with the mean. The separation between the two populations
+  is massive.
 
-Controlli in alto:
+Top controls:
 
-- **Spazio**: dropdown per scegliere uno dei tre PCA.
-- **Tema**: switch chiaro / scuro.
-- **Spaziatura**: switch compatta / espansa (cambia i range degli assi).
+- **Space**: dropdown to pick one of the three PCA spaces.
+- **Theme**: light / dark switch.
+- **Spacing**: compact / expanded switch (changes axis ranges).
 
-## Risultato chiave
+## Key result
 
-Le sezioni tematiche del Voynich (Herbal, Balneo, Pharma, Stars) sono in larga
-parte **mono-lingua**:
+The thematic sections of the Voynich (Herbal, Balneo, Pharma, Stars) are
+largely **mono-language**:
 
-| Sezione | Currier-A | Currier-B |
+| Section | Currier-A | Currier-B |
 |---|---|---|
-| Herbal | 7 433 token | 3 070 token |
-| Balneo | 0 | 6 602 |
-| Pharma | 1 631 | 168 |
-| Stars | 0 | 10 631 |
+| Herbal | 7,433 tokens | 3,070 tokens |
+| Balneo | 0 | 6,602 |
+| Pharma | 1,631 | 168 |
+| Stars  | 0 | 10,631 |
 
-Quando si separa il corpus per `$L`, emergono **due grammatiche complementari**
-con assi principali quasi ortogonali (cos PC1<sub>A</sub>, PC1<sub>B</sub> = 0.49):
+When the corpus is split by `$L`, **two complementary grammars** emerge with
+nearly orthogonal principal axes (cos PC1<sub>A</sub>, PC1<sub>B</sub> = 0.49):
 
-- **Traccia A** (Hand A, formularista): Herbal-A → Pharma-A. Estrazione termica
-  con `ch/chy/t`, ricombinazione composita con `ody`, sintassi verbale con
-  memoria di 2° ordine forte (CMI = 0.49).
-- **Traccia B** (Hand B, schedarista): Herbal-B → Balneo-B → Stars-B. Macerazione
-  monotona con `edy` (run di 10+ in fila), grammatica markoviana di 1° ordine
-  (CMI ≈ 0.07), distillazione iterata con `lk` in Stars.
+- **Track A** (Hand A, formulary writer): Herbal-A → Pharma-A. Thermal
+  extraction with `ch/chy/t`, composite recombination with `ody`, verbal
+  syntax with strong second-order memory (CMI = 0.49).
+- **Track B** (Hand B, file-card writer): Herbal-B → Balneo-B → Stars-B.
+  Monotone maceration with `edy` (runs of 10+ in a row), first-order Markov
+  grammar (CMI ≈ 0.07), iterated distillation with `lk` in Stars.
 
-Le due tracce condividono i 4 solventi (k/t/l/s), i morfemi atomici, l'architettura
-del cifrario — ma li compongono con regole grammaticali strutturalmente diverse.
+The two tracks share the 4 solvents (k/t/l/s), the atomic morphemes, and the
+cipher architecture — but compose them with structurally different grammatical
+rules.
 
-## Dati e metodo
+## Data and method
 
-Corpus: trascrizione Takahashi/Stolfi del Voynich Manuscript (file `LSI_ivtff_0d.txt`,
-solo righe `;H>`, separatore punto, encoding latin-1).
+Corpus: Takahashi/Stolfi transcription of the Voynich Manuscript (file
+`LSI_ivtff_0d.txt`, only `;H>` lines, dot separator, latin-1 encoding).
 
-Currier language: campo `$L` codificato dai page-header
-`<fNNN> <! $I=i $Q=q $P=p $L=l $H=h $X=x>`. Cf. la documentazione del file
-Stolfi: *"l is the language in Currier's sense, A or B"*.
+Currier language: `$L` field encoded by the page-headers
+`<fNNN> <! $I=i $Q=q $P=p $L=l $H=h $X=x>`. See Stolfi's documentation:
+*"l is the language in Currier's sense, A or B"*.
 
-Vettori folio: per ogni folio si calcola la frequenza relativa di 27 morfemi
-(`k/t/l/s/ch/sh/ckh/cth`, suffissi verbali `lky/eeey/eey/edy/ody/chy/shy/ey/dy`,
-aspettuali `al/am`, esiti `ar/or`, sistema AIN `aiiin/aiin/ain`, atomi
-`q/d/y`). Folii con < 30 token esclusi. Analizzati 174 folii (102 Hand A,
-72 Hand B) sulle ~226 pagine totali.
+Folio vectors: for each folio we compute the relative frequency of 27
+morphemes (`k/t/l/s/ch/sh/ckh/cth`, verbal suffixes
+`lky/eeey/eey/edy/ody/chy/shy/ey/dy`, aspectuals `al/am`, outcomes `ar/or`,
+AIN system `aiiin/aiin/ain`, atoms `q/d/y`). Folios with fewer than 30 tokens
+are excluded. 174 folios analyzed (102 Hand A, 72 Hand B) out of ~226 total
+pages.
 
-PCA manuale via decomposizione spettrale di numpy (`np.linalg.eigh` sulla
-matrice di covarianza centrata).
+PCA computed by hand via spectral decomposition with numpy
+(`np.linalg.eigh` on the centered covariance matrix).
 
-## Provenienza e contesto di ricerca
+## Provenance and research context
 
-Questo visualizzatore è il risultato di una sessione di analisi (sessione 106,
-7 aprile 2026) all'interno di un programma di ricerca più ampio sul Voynich
-Manuscript come **cifrario di un farmacista** medievale. Il programma di ricerca
-è documentato altrove (Paper III, "The Pharmacists' Cipher", in preparazione).
+This visualizer is the output of an analysis session (session 106,
+2026-04-07) within a broader research program on the Voynich Manuscript as a
+medieval **pharmacist's cipher**. The research program is documented elsewhere
+(Paper III, "The Pharmacists' Cipher", in preparation).
 
-Il dataset PCA, gli script di estrazione e i ~100 test statistici di supporto
-alle 88+ ipotesi del programma vivono in un repository di lavoro privato. Solo
-il visualizzatore è pubblicato qui.
+The PCA dataset, the extraction scripts, and the ~100 statistical tests
+backing the 88+ hypotheses of the program live in a private working
+repository. Only the visualizer is published here.
 
-## Tecnologie
+## Technologies
 
-- **Plotly.js 2.32** per il rendering 3D e i pannelli secondari.
-- HTML/CSS/JS vanilla, nessun framework.
-- Singolo file HTML self-contained (~280 KB), nessuna richiesta di rete dopo
-  il caricamento iniziale di Plotly da CDN.
+- **Plotly.js 2.32** for the 3D rendering and the secondary panels.
+- Vanilla HTML/CSS/JS, no framework.
+- Single self-contained HTML file (~92 KB), no network requests after the
+  initial Plotly load from CDN.
 
-## Licenza
+## License
 
-CC BY 4.0 (Attribution). Se usi il visualizzatore o i dati derivati per
-pubblicazioni o presentazioni, cita "Placa A., Voynich Visualization,
-sessione 106 — 2026".
+CC BY 4.0 (Attribution). If you use the visualizer or derived data in
+publications or talks, please cite "Placa A., Voynich Visualization,
+session 106 — 2026".
 
-## Riproducibilità
+## Reproducibility
 
-L'HTML è generato da uno script Python che parsa il corpus Takahashi e
-calcola la PCA. Lo script vive nel repo di lavoro privato. I dati grezzi
-(Takahashi LSI_ivtff_0d.txt) sono pubblici e disponibili sul sito di
-Stolfi/Reeds: <http://www.ic.unicamp.br/~stolfi/voynich/>.
+The HTML is generated by a Python script that parses the Takahashi corpus
+and computes the PCA. The script lives in the private working repo. The raw
+data (Takahashi `LSI_ivtff_0d.txt`) is publicly available on Stolfi/Reeds'
+site: <http://www.ic.unicamp.br/~stolfi/voynich/>.

@@ -1,67 +1,42 @@
-# Come deployare su GitHub Pages
+# How to deploy on GitHub Pages
 
-Tre step. Ti servono ~2 minuti e nessun account a pagamento.
+Three steps. Takes ~2 minutes and no paid account.
 
-## Step 1 — Crea il repo pubblico su GitHub
+## Step 1 — Create the public repo on GitHub
 
-1. Vai su <https://github.com/new>
-2. Compila:
+1. Go to <https://github.com/new>
+2. Fill in:
    - **Owner**: `alessandroplaca-uro`
    - **Repository name**: `voynich-visualization`
-   - **Description** (opzionale): `Interactive 3D visualization of the Voynich morphemic system — Currier hand edition`
-   - **Visibility**: ⚠️ **Public** (deve essere pubblico per Pages gratuito)
-   - **Initialize this repository with**: lascia tutto SPENTO. NON aggiungere README, .gitignore, license — il repo locale ce li ha già.
+   - **Description** (optional): `Interactive 3D visualization of the Voynich morphemic system — Currier hand edition`
+   - **Visibility**: ⚠️ **Public** (must be public for free Pages)
+   - **Initialize this repository with**: leave everything OFF.
 3. Click **Create repository**.
 
-## Step 2 — Pusha il repo locale
+## Step 2 — Upload the files
 
-Questo repo locale è già inizializzato e ha un commit pronto. Dal terminale:
+Drop the 5 files (`index.html`, `README.md`, `LICENSE`, `DEPLOY.md`,
+`.nojekyll`) into the repo via the web upload page:
 
-```bash
-cd /home/user/voynich-visualization
-git remote add origin https://github.com/alessandroplaca-uro/voynich-visualization.git
-git push -u origin main
-```
+<https://github.com/alessandroplaca-uro/voynich-visualization/upload/main>
 
-(Se ti chiede credenziali, usa il tuo token GitHub come password.)
+Commit message: `Initial deploy`. Click **Commit changes**.
 
-## Step 3 — Attiva GitHub Pages
+## Step 3 — Enable GitHub Pages
 
-1. Vai su <https://github.com/alessandroplaca-uro/voynich-visualization/settings/pages>
-2. Sotto **Build and deployment** → **Source**: scegli **Deploy from a branch**
+1. Go to <https://github.com/alessandroplaca-uro/voynich-visualization/settings/pages>
+2. Under **Build and deployment** → **Source**: choose **Deploy from a branch**
 3. **Branch**: `main`, **Folder**: `/ (root)`
 4. Click **Save**.
-5. Aspetta 30-60 secondi. Quando vedi il banner verde "Your site is live at..." è pronto.
+5. Wait 30-60 seconds. When you see the green banner "Your site is live at..."
+   it is ready.
 
-L'URL sarà: <https://alessandroplaca-uro.github.io/voynich-visualization/>
+The URL will be: <https://alessandroplaca-uro.github.io/voynich-visualization/>
 
-## Aggiornamenti futuri
+## Notes
 
-Quando vuoi aggiornare il visualizzatore:
-
-1. Nel repo privato `voynich-memory`, rigenera l'HTML:
-   ```bash
-   python3 rupescissa/viz/generate_voynich_3d_v2.py
-   ```
-2. Copia l'output qui:
-   ```bash
-   cp /home/user/voynich-memory/rupescissa/viz/voynich_3d.html \
-      /home/user/voynich-visualization/index.html
-   ```
-3. Commit + push:
-   ```bash
-   cd /home/user/voynich-visualization
-   git add index.html
-   git commit -m "Update viz: <descrizione>"
-   git push
-   ```
-
-GitHub Pages si rebuilda automaticamente in 30-60 secondi.
-
-## Note
-
-- Il file `.nojekyll` (vuoto) dice a GitHub Pages di NON processare il sito
-  con Jekyll. Necessario per file/cartelle che iniziano con `_`.
-- L'HTML è self-contained: ~92 KB con tutti i dati embedded. Plotly viene
-  caricato dal CDN al primo accesso.
-- Niente backend, niente DB, niente API key. È un sito completamente statico.
+- The (empty) `.nojekyll` file tells GitHub Pages NOT to process the site
+  with Jekyll. Required for files/folders starting with `_`.
+- The HTML is self-contained: ~92 KB with all data embedded. Plotly is
+  loaded from the CDN on first access.
+- No backend, no DB, no API keys. It is a fully static site.
